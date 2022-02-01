@@ -2,7 +2,7 @@
 
 This repo includes the Emacs initialization file which I have used for several years for python coding of deep learning.
 
-<img src="examples/emacs-interface.png" width="800" />
+<img src="examples/emacs-new.png" width="600" />
 
 
 ## Usage
