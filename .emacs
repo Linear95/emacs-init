@@ -57,6 +57,7 @@
 ;; BASIC CUSTOMIZATION----------------------------------------------------
 (menu-bar-mode -1)
 (tool-bar-mode -1)
+(toggle-scroll-bar -1)
 (show-paren-mode 1) ;; enable the brace matching
 (setq blink-matching-delay 0.3);;prevent cursor jump back when close brace
 (setq inhibit-startup-message t) ;; hide the startup message
