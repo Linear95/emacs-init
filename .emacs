@@ -1,19 +1,25 @@
 
-;;-----------------------package-setting-------------------------------------------
+;; package-setting
+;; -------------------------------------------
 (require 'package)
 
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/") t)
+;; (add-to-list 'package-archives
+;;	     '("melpa" . "http://melpa.org/packages/") t)
+
+(setq package-archives '(("gnu"    . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                         ("nongnu" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/")
+                         ("melpa"  . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
 
 (package-initialize)
 
+;; you can manually do package-refresh-contents if your package is not found
 (when (not package-archive-contents)
   (package-refresh-contents))
 
 ;;put your installed package here
 (defvar myPackages
   '(better-defaults      ;; small changes
-    ;; flycheck             ;; for python syntax checking
+    flycheck             ;; for python syntax checking
     ;; ein                  ;; for ipython notebook
     ;; elpy                 ;; for python ide
     ;; jedi                 ;; python autocomplete
@@ -90,16 +96,23 @@
 ;; (setq initial-buffer-choice 'helm-recentf)
 
 
-;;auto complete
-;;-----------------------------------------------------------------------
+;; auto complete
+;; -----------------------------------------------------------------------
 (require 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
 ;;(global-auto-complete-mode t)
 ;;(setq ac-modes (delq 'python-mode ac-modes)) ;; ac mode will conflict with jedi in python||elpy mode
 
-;;Interactively Do Things
-;;-----------------------------------------------------------------------
+;; flycheck
+;; -----------------------------------------------------------------------
+(add-hook 'python-mode-hook
+          (lambda ()
+            (flycheck-mode 1)
+            (setq flycheck-checker 'python-pylint)))
+
+;; Interactively Do Things
+;; -----------------------------------------------------------------------
 (require 'ido)
 (ido-mode t)
 (ido-everywhere t)
@@ -111,8 +124,8 @@
 (ido-vertical-mode 1)  ;; list items vertically
 (setq ido-vertical-define-keys 'C-n-and-C-p-only)
 
-;;Meta-X enhancement
-;;----------------------------------------------------------------------
+;; Meta-X enhancement
+;; ----------------------------------------------------------------------
 (require 'smex) ; Not needed if you use package.el
 (smex-initialize) ; Can be omitted. This might cause a (minimal) delay  when Smex is auto-initialized on its first run.
 (global-set-key (kbd "M-x") 'smex)
@@ -120,7 +133,7 @@
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
-;;------------------------neotree----------------------------------------
+;; ------------------------neotree----------------------------------------
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
